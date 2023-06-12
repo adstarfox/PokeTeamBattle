@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+    <header><p>Pick a Generation!</p>
+      <section id="genSelect">
+        <button class="genBtn" id="genOne">Gen 1</button>
+        <button class="genBtn" id="genTwo">Gen 2</button>
+        <button class="genBtn" id="genThree">Gen 3</button>
+        <button id="deleteBtn">Start Over</button>
+      </section>
+    </header>
+    <main>
+      <section>
+          <form id="poke1">
+            <label for="poke1-select">Select your Pokemon</label>
+            <select class="selectors" name="poke1-select" id="poke1-select"></select>
+          </form>
+          <section class="poke-containers" id="poke-container1"></section>
+      </section>
+      <section>  
+        <form id="poke2">
+          <label for="poke2-select">Select your Pokemon</label>
+          <select class="selectors" name="poke2-select" id="poke2-select"></select>
+        </form>
+        <section class="poke-containers" id="poke-container2"></section>
+      </section>
+    </main>
+    
+    
+    <footer>
+      <button id="complimentButton">Get a compliment</button>
+      <button id="fortuneBtn">Get your fortune here</button>
+    </footer>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+    
+  </body>
+</html>
