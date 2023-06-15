@@ -11,6 +11,7 @@ const {
     getCompliment,
     getFortune,
     savePokemon,
+    savePlayers,
     getPokemon,
     deletePoke,
     updatePoke
@@ -21,9 +22,9 @@ app.get(`/api/fortune`, getFortune)
 app.get(`/api/get-pokemon`, getPokemon)
 
 app.post(`/api/gen-selected`, savePokemon)
-app.delete(`/api/:id`, deletePoke)
+app.post(`/api/players`, savePlayers)
 
-app.put(`/api/:name`, updatePoke)
+app.put(`/api/:player`, updatePoke)
 
 
 app.listen(4000, () => console.log("Server running on 4000"));

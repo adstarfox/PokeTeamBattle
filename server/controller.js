@@ -1,4 +1,5 @@
 let pokeArray = [] 
+let players = {}
 
 module.exports = {
 
@@ -21,30 +22,35 @@ module.exports = {
         res.status(200).send(randomFortune)
     },
     savePokemon: (req, res) => {
+        pokeArray = []
         // console.log(req.body)
         for (let i = 0; i < req.body.length;i++){
-            req.body[i].attack = Math.floor(Math.random() * 100)
-            req.body[i].hp = 100
+            pokeArray.push(req.body[i])
         }
-        // console.log(req.body)
-        pokeArray.push(req.body)
+        // console.log(pokeArray)
         res.status(200).send(pokeArray)
+    },
+    savePlayers: (req, res) => {
+        let {id, front, player, name} = req.body
+        players[player] = {
+            name,
+            id, 
+            front,
+            hp: 100
+        }
+        res.status(200).send(players)
     },
     getPokemon: (req, res) => {
         res.status(200).send(pokeArray)
     },
-    deletePoke: (req,res) => {
-        pokeArray = []
-        res.status(200).send(pokeArray)
-    },
     updatePoke: (req,res) => {
         // console.log(req.params.name)
-        let {name} = req.params
-        console.log(pokeArray)
-        let index = pokeArray.findIndex(i => i[0].name === name)
-        console.log(index)
+        let {player} = req.params
+        // console.log(pokeArray)
+        let damage = Math.floor(Math.random() * 50)
+        players[player].hp -= damage
 
-        res.status(200).send(`50`)
+        res.status(200).send(players)
     }
 
 }

@@ -7,26 +7,27 @@
   <body class="container">
     <header><p>Pick a Generation!</p>
       <section id="genSelect">
-        <button class="genBtn" id="genOne">Gen 1</button>
-        <button class="genBtn" id="genTwo">Gen 2</button>
-        <button class="genBtn" id="genThree">Gen 3</button>
-        <button id="deleteBtn">Start Over</button>
+        <button class="genBtn" id="1">Gen 1</button>
+        <button class="genBtn" id="2">Gen 2</button>
+        <button class="genBtn" id="3">Gen 3</button>
       </section>
     </header>
+    <form id="poke">
+      <label for="poke-select">Select your Pokemon</label>
+      <select required class="selectors" name="poke-select" id="poke-select"></select>
+      <label for="player-select">Select which player</label>
+      <div name="player-select">
+        Player 1<input class="player-selectors" type="radio" value="0"/>
+        Player 2<input class="player-selectors" type="radio" value="1"/>
+      </div>
+      <button>Submit</button>
+    </form>
     <main>
       <section>
-          <form id="poke1">
-            <label for="poke1-select">Select your Pokemon</label>
-            <select class="selectors" name="poke1-select" id="poke1-select"></select>
-          </form>
-          <section class="poke-containers" id="poke-container1"></section>
+          <section class="poke-containers" id="player-0"></section>
       </section>
       <section>  
-        <form id="poke2">
-          <label for="poke2-select">Select your Pokemon</label>
-          <select class="selectors" name="poke2-select" id="poke2-select"></select>
-        </form>
-        <section class="poke-containers" id="poke-container2"></section>
+        <section class="poke-containers" id="player-1"></section>
       </section>
     </main>
     
