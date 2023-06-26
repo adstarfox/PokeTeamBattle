@@ -1,15 +1,15 @@
 const express = require("express");
 const cors = require("cors");
+const path = require('path')
 
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
+app.use(express.static('client'))
 
 const { 
-    getCompliment,
-    getFortune,
     savePokemon,
     savePlayers,
     getPokemon,
@@ -17,8 +17,10 @@ const {
     updatePoke
         } = require('./controller')
 
-app.get("/api/compliment", getCompliment);
-app.get(`/api/fortune`, getFortune)
+app.get('/', (req, res) => {
+    res.status(200).sendFile(path.join(__dirname,"index.html"))
+})
+
 app.get(`/api/get-pokemon`, getPokemon)
 
 app.post(`/api/gen-selected`, savePokemon)
@@ -27,4 +29,4 @@ app.post(`/api/players`, savePlayers)
 app.put(`/api/:player`, updatePoke)
 
 
-app.listen(4000, () => console.log("Server running on 4000"));
+app.listen(4001, () => console.log("Server running on 4001"));

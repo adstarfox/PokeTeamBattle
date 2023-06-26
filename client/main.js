@@ -5,8 +5,6 @@ const form = document.querySelector(`#poke`)
 const pokeSelect = document.querySelector(`#poke-select`)
 const playerSelectors = document.querySelectorAll(`.player-selectors`)
 
-const baseURL = `http://localhost:4000/api`
-
 const getCompliment = () => {
     axios.get(`${baseURL}` + `/compliment/`)
         .then(res => {
@@ -26,7 +24,7 @@ const getFortune = () => {
 
 const getPokeData = data => {
     data.forEach((obj, index) => {
-        let option = document.createElement(`option`)
+        option = document.createElement(`option`)
         let {name} = obj
         option.value = name
         option.textContent = `#${index +1} ` + name
@@ -38,9 +36,8 @@ const getGen = evt => {
         axios.get(`https://pokeapi.co/api/v2/generation/${evt.target.id}`)
             .then(res => {
                 // console.log(res.data)
-                axios.post(`${baseURL}` + `/gen-selected`,res.data.pokemon_species)
+                axios.post(`/api/gen-selected`,res.data.pokemon_species)
                     .then(response => {
-                        // console.log(response)
                         let pokeData = response.data
                         getPokeData(pokeData) 
                     })
@@ -53,7 +50,7 @@ const getGen = evt => {
 const deletePoke = evt => {
     pokeContainer1.innerHTML = ``
     pokeContainer2.innerHTML = ``
-    axios.delete(`${baseURL}`+`/${evt.target.id}`)
+    axios.delete(`/api/${evt.target.id}`)
         .then(res => {
             alert(`Pokemon have been deleted. Please select a new Generation`)
         })
@@ -64,7 +61,9 @@ const deletePoke = evt => {
     }
     
  const damagePoke = (player) => {
-    axios.put(`${baseURL}/${player}`)
+     let hitPlayer = player === '0' ? '1' : '0'
+     console.log(`${player}:${hitPlayer}`)
+    axios.put(`api/${hitPlayer}`)
         .then(res => {
             displayPoke(res.data)
         })
@@ -93,7 +92,7 @@ const putPoke = evt => {
             player,
             name
         }
-        axios.post(`${baseURL}/players`,body)
+        axios.post(`/api/players`,body)
             .then(res => {
                 displayPoke(res.data)
             })
@@ -126,8 +125,6 @@ const displayPoke = (obj) => {
     }
 }
 
-complimentBtn.addEventListener('click', getCompliment)
-fortuneBtn.addEventListener(`click`, getFortune)
 form.addEventListener(`submit`, putPoke)
 
 for(let i = 0; i < genBtns.length; i++){
