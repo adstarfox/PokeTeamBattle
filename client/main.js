@@ -1,26 +1,11 @@
-const complimentBtn = document.getElementById("complimentButton")
-const fortuneBtn = document.getElementById(`fortuneBtn`)
 const genBtns = document.getElementsByClassName(`genBtn`)
-const form = document.querySelector(`#poke`)
+const pokeForm = document.querySelector(`#poke`)
+const nameForm = document.querySelector(`#player-name`)
 const pokeSelect = document.querySelector(`#poke-select`)
+const playerNames = document.querySelectorAll('.player-names')
 const playerSelectors = document.querySelectorAll(`.player-selectors`)
+const pName = document.querySelectorAll(`.pName`)
 
-const getCompliment = () => {
-    axios.get(`${baseURL}` + `/compliment/`)
-        .then(res => {
-            const data = res.data;
-            alert(data);
-    });
-};
-
-const getFortune = () => {
-    axios.get(`${baseURL}` + `/fortune/`)
-        .then(res => {
-            alert(res.data)
-        })
-        .catch(err => console.log(err))
-
-}
 
 const getPokeData = data => {
     data.forEach((obj, index) => {
@@ -62,10 +47,10 @@ const deletePoke = evt => {
     
  const damagePoke = (player) => {
      let hitPlayer = player === '0' ? '1' : '0'
-     console.log(`${player}:${hitPlayer}`)
+    //  console.log(`${player}:${hitPlayer}`)
     axios.put(`api/${hitPlayer}`)
         .then(res => {
-            displayPoke(res.data)
+                displayPoke(res.data)
         })
         .catch(err => console.log(err))
     }
@@ -74,10 +59,12 @@ const deletePoke = evt => {
 const putPoke = evt => {
     evt.preventDefault()
     let player;
+    let playerName;
     for (let i = 0; i < playerSelectors.length; i++){
         if (playerSelectors[i].checked){
             playerSelectors[i].disabled = true
             player = playerSelectors[i].value
+            playerName = playerNames[i].textContent
         }
     }
     // console.log(evt.target.value)
@@ -90,6 +77,7 @@ const putPoke = evt => {
             id,
             front,
             player,
+            playerName,
             name
         }
         axios.post(`/api/players`,body)
@@ -101,11 +89,22 @@ const putPoke = evt => {
     .catch(err => console.log(err))
 }
 
+const playerName = evt => {
+    evt.preventDefault()
+    playerNames[0].textContent = `${pName[0].value}`
+    playerNames[1].textContent = `${pName[1].value}`
+}
+
 const displayPoke = (obj) => {
     for (let player in obj){
         let container = document.querySelector(`#player-${player}`)
         container.innerHTML = ``
-        let {name, front, hp} = obj[player]
+        let {playerName, name, front, hp} = obj[player]
+
+        let newHp = hp <= 0 ? 0 : hp
+
+        const playerTitle = document.createElement('h1')
+        playerTitle.innerText = `${playerName}`
 
         const pokePicture = document.createElement(`div`)
         pokePicture.classList.add(`poke-picure`)
@@ -115,17 +114,19 @@ const displayPoke = (obj) => {
         pokeCard.classList.add(`poke-card`)
         pokeCard.innerHTML = 
         `<p class="poke-name">${name}</p>
-        <p>${hp}</p>
+        <p>HP:${newHp}</p>
         <div class="btns-container">
         <button class="poke-attack-btns" onclick="damagePoke('${player}')">Attack</button>
         </div>
         `
-        container.appendChild(pokePicture)
         container.appendChild(pokeCard)
+        container.appendChild(pokePicture)
+        container.appendChild(playerTitle)
     }
 }
 
-form.addEventListener(`submit`, putPoke)
+pokeForm.addEventListener(`submit`, putPoke)
+nameForm.addEventListener(`change`, playerName)
 
 for(let i = 0; i < genBtns.length; i++){
     genBtns[i].addEventListener(`click`, getGen)

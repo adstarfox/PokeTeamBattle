@@ -13,8 +13,10 @@ module.exports = {
     },
     savePlayers: (req, res) => {
         // players = {}
-        let {id, front, player, name} = req.body
+        // console.log(req.body)
+        let {id, front, player, playerName, name} = req.body
         players[player] = {
+            playerName,
             name,
             id, 
             front,

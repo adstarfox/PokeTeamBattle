@@ -6,11 +6,13 @@
   </head>
   <body class="container">
     <header>
-      <div id="playerNames">
-        <h6>Please enter 2 player names</h6>
-        <input type="text" placeholder="Player 1">
-        <input type="text" placeholder="Player 2">
-      </div>
+      <form id="player-name">
+        <div id="playerNames">
+          <h6>Please enter 2 player names</h6>
+          <input class="pName" type="text" placeholder="Player 1">
+          <input class="pName" type="text" placeholder="Player 2">
+        </div>
+      </form>
       <div class="genPick">
         <p>Pick a Generation!</p>
         <section id="genSelect">
@@ -24,10 +26,13 @@
       <label for="poke-select">Select your Pokemon</label>
       <select required class="selectors" name="poke-select" id="poke-select"></select>
       <label for="player-select">Select which player</label>
-      <div name="player-select">
-        Player 1
-        <input class="player-selectors" type="radio" value="0"/>
-        Player 2 <input class="player-selectors" type="radio" value="1"/>
+      <div name="player-select" id="player-select">
+        <label for="p1" class="player-names">Player 1</label>
+        <input name="p1" class="player-selectors" type="radio" value="0"/>
+
+        <label for="p2" class="player-names">Player 2</label>
+        <input name="p2" class="player-selectors" type="radio" value="1"/> 
+
       </div>
       <button>Submit</button>
     </form>
