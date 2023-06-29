@@ -35,6 +35,11 @@ module.exports = {
         players[player].hp -= damage
 
         res.status(200).send(players)
+    },
+    deletePoke: (req,res) => {
+        pokeArray = []
+        players = {}
+        res.status(200).send('Starting the simulation over')
     }
 
 }

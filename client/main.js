@@ -1,10 +1,11 @@
 const genBtns = document.getElementsByClassName(`genBtn`)
 const pokeForm = document.querySelector(`#poke`)
-const nameForm = document.querySelector(`#player-name`)
+const nameForm = document.querySelector('#player-name')
 const pokeSelect = document.querySelector(`#poke-select`)
 const playerNames = document.querySelectorAll('.player-names')
 const playerSelectors = document.querySelectorAll(`.player-selectors`)
 const pName = document.querySelectorAll(`.pName`)
+const startOverBtn = document.querySelector('#start-over')
 
 
 const getPokeData = data => {
@@ -33,16 +34,13 @@ const getGen = evt => {
         }
     
 const deletePoke = evt => {
-    pokeContainer1.innerHTML = ``
-    pokeContainer2.innerHTML = ``
-    axios.delete(`/api/${evt.target.id}`)
+    axios.delete(`/api/start-over`)
         .then(res => {
-            alert(`Pokemon have been deleted. Please select a new Generation`)
+            alert(res.data)
+            location.reload()
         })
         .catch(err => console.log(err))
-        
-    poke1Selector.innerHTML = ``
-    poke2Selector.innerHTML = ``
+
     }
     
  const damagePoke = (player) => {
@@ -89,10 +87,25 @@ const putPoke = evt => {
     .catch(err => console.log(err))
 }
 
+const capitalize = str => {
+    return str[0].toUpperCase() + str.slice(1)
+}
+
+const fainted = (container, playerName, name) => {
+    const disButton = container.querySelector('button')  
+    alert(`${playerName}'s ${capitalize(name)} has fainted`)
+    container.classList.add('fainted')
+    disButton.disabled = true
+}
+
 const playerName = evt => {
     evt.preventDefault()
-    playerNames[0].textContent = `${pName[0].value}`
-    playerNames[1].textContent = `${pName[1].value}`
+    if(playerNames[0].textContent){
+        playerNames[0].textContent = capitalize(pName[0].value) + `'s`
+    }
+    if(playerNames[1].textContent){
+        playerNames[1].textContent = capitalize(pName[1].value) + `'s`
+    }
 }
 
 const displayPoke = (obj) => {
@@ -101,33 +114,41 @@ const displayPoke = (obj) => {
         container.innerHTML = ``
         let {playerName, name, front, hp} = obj[player]
 
-        let newHp = hp <= 0 ? 0 : hp
+        let pokeName = capitalize(name)
 
+        let newHp = hp <= 0 ? 0 : hp
+        
         const playerTitle = document.createElement('h1')
         playerTitle.innerText = `${playerName}`
-
+        
         const pokePicture = document.createElement(`div`)
         pokePicture.classList.add(`poke-picure`)
         pokePicture.innerHTML = `<img alt='who's that pokemon?' src="${front}" class="poke-picture"/>`
-
+        
         const pokeCard = document.createElement(`div`)
         pokeCard.classList.add(`poke-card`)
         pokeCard.innerHTML = 
-        `<p class="poke-name">${name}</p>
+        `<p class="poke-name">${pokeName}</p>
         <p>HP:${newHp}</p>
         <div class="btns-container">
         <button class="poke-attack-btns" onclick="damagePoke('${player}')">Attack</button>
         </div>
-        `
+        `        
         container.appendChild(pokeCard)
         container.appendChild(pokePicture)
         container.appendChild(playerTitle)
+
+        if (newHp === 0){
+            fainted(container, playerName, name);
+        }
     }
 }
 
 pokeForm.addEventListener(`submit`, putPoke)
-nameForm.addEventListener(`change`, playerName)
+nameForm.addEventListener(`submit`, playerName)
 
 for(let i = 0; i < genBtns.length; i++){
     genBtns[i].addEventListener(`click`, getGen)
 }
+
+startOverBtn.addEventListener('click', deletePoke)

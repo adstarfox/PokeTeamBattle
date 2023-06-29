@@ -28,5 +28,7 @@ app.post(`/api/players`, savePlayers)
 
 app.put(`/api/:player`, updatePoke)
 
+app.delete(`/api/start-over`, deletePoke)
+
 
 app.listen(4001, () => console.log("Server running on 4001"));

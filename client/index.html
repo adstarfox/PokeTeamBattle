@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./styles.css">
     <title>Poke Battles</title>
   </head>
@@ -9,8 +10,9 @@
       <form id="player-name">
         <div id="playerNames">
           <h6>Please enter 2 player names</h6>
-          <input class="pName" type="text" placeholder="Player 1">
-          <input class="pName" type="text" placeholder="Player 2">
+          <input class="pName" type="text" placeholder="Trainer 1">
+          <input class="pName" type="text" placeholder="Trainer 2">
+          <button>Submit</button>
         </div>
       </form>
       <div class="genPick">
@@ -27,10 +29,10 @@
       <select required class="selectors" name="poke-select" id="poke-select"></select>
       <label for="player-select">Select which player</label>
       <div name="player-select" id="player-select">
-        <label for="p1" class="player-names">Player 1</label>
+        <label for="p1" class="player-names">Trainer 1</label>
         <input name="p1" class="player-selectors" type="radio" value="0"/>
 
-        <label for="p2" class="player-names">Player 2</label>
+        <label for="p2" class="player-names">Trainer 2</label>
         <input name="p2" class="player-selectors" type="radio" value="1"/> 
 
       </div>
@@ -47,7 +49,7 @@
     
     
     <footer>
-      Footer
+      <button id="start-over">Start over</button>
     </footer>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
