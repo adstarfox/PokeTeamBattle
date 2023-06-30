@@ -80,3 +80,8 @@ footer>button{
     -webkit-filter: grayscale(100%); 
     filter: grayscale(100%);
 }
+
+.purple{
+    display: none;
+    /* visibility: hidden; */
+}

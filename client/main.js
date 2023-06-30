@@ -31,6 +31,8 @@ const getGen = evt => {
             })
             .catch(err => console.log(err))
 
+            const genSec = document.querySelector('#genPick')
+            genSec.classList.add('purple')
         }
     
 const deletePoke = evt => {
@@ -100,12 +102,9 @@ const fainted = (container, playerName, name) => {
 
 const playerName = evt => {
     evt.preventDefault()
-    if(playerNames[0].textContent){
         playerNames[0].textContent = capitalize(pName[0].value) + `'s`
-    }
-    if(playerNames[1].textContent){
         playerNames[1].textContent = capitalize(pName[1].value) + `'s`
-    }
+        nameForm.classList.add('purple')
 }
 
 const displayPoke = (obj) => {
