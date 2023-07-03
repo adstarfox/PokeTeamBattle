@@ -1,5 +1,6 @@
 let pokeArray = [] 
-let players = {}
+let players = []
+
 
 module.exports = {
     savePokemon: (req, res) => {
@@ -12,33 +13,31 @@ module.exports = {
         res.status(200).send(pokeArray)
     },
     savePlayers: (req, res) => {
-        // players = {}
-        // console.log(req.body)
-        let {id, front, player, playerName, name} = req.body
-        players[player] = {
-            playerName,
-            name,
-            id, 
-            front,
-            hp: 100
-        }
+        req.body.hp = 100
+        players.push(req.body)
         res.status(200).send(players)
     },
     getPokemon: (req, res) => {
         res.status(200).send(pokeArray)
     },
+    getPlayers: (req,res) => {
+        res.status(200).send(players)
+    },
     updatePoke: (req,res) => {
-        // console.log(req.params.name)
-        let {player} = req.params
-        // console.log(pokeArray)
+        let rndPlayer = Math.floor(Math.random() * 3)
         let damage = Math.floor(Math.random() * 25)
-        players[player].hp -= damage
+
+        if(req.params.player === '0'){
+            players[rndPlayer].hp -= damage
+        }else if (req.params.player === '1'){
+            players[rndPlayer + 3].hp -= damage
+        }
 
         res.status(200).send(players)
     },
     deletePoke: (req,res) => {
         pokeArray = []
-        players = {}
+        players = []
         res.status(200).send('Starting the simulation over')
     }
 

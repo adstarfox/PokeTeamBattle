@@ -13,6 +13,7 @@ const {
     savePokemon,
     savePlayers,
     getPokemon,
+    getPlayers,
     deletePoke,
     updatePoke
         } = require('./controller')
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.get(`/api/get-pokemon`, getPokemon)
+app.get(`/api/teams`, getPlayers)
 
 app.post(`/api/gen-selected`, savePokemon)
 app.post(`/api/players`, savePlayers)

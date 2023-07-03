@@ -10,8 +10,30 @@ header{
     background-color: red;
 }
 
+#startBtn{
+    height: 500px;
+    width: 500px;
+    color: white;
+    background-image: url(./Images/Start.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    position: fixed;
+    top: calc(50% - 250px);
+    left: calc(50% - 250px);
+}
+#startBtn:hover{
+    cursor:pointer;
+    background-image: url(./Images/Open3.png);
+    font-size: xx-large;
+}
+
 .player-name{
-    height: 50px;
+    width: 100vw;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    flex-direction: row;
 }
 
 #playerNames{
@@ -35,10 +57,10 @@ header{
 }
 
 main{
-    height: calc(100vh - 260px);
+    height: calc(100vh - 200px);
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 img{
     height:200px;
@@ -51,18 +73,29 @@ footer{
     justify-content: space-around;
     align-items: center;
 }
+footer > img{
+    height: 100%;
+}
 footer>button{
     height: 50%;
 }
 .poke-containers{
+    width: 700px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    border: solid black 5px;
 }
-.poke-picture{
+
+.poke-cards{
     height: 300px;
+}
+
+.poke-picture{
+    height: 200px;
 }
 
 .poke-name{
@@ -83,5 +116,4 @@ footer>button{
 
 .purple{
     display: none;
-    /* visibility: hidden; */
 }
