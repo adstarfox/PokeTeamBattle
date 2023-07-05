@@ -234,7 +234,7 @@ input[type='radio']{
 #player-0 > h3{
     font-size: 50px;
     position:relative;
-    top: -30px;
+    top: -10px;
 
 }
 
@@ -245,7 +245,7 @@ input[type='radio']{
 #player-1 > h3{
     font-size: 50px;
     position:relative;
-    top: -30px;
+    top: -10px;
 }
 
 .poke-picture{
