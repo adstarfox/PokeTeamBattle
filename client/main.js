@@ -1,5 +1,7 @@
+const main = document.querySelector('main')
 const title = document.getElementById('title')
 const startBtn = document.getElementById('startBtn')
+const playerContainer = document.getElementById('player-container')
 const genBtns = document.getElementsByClassName(`genBtn`)
 const genPick = document.getElementById('genPick')
 const pokeForm = document.querySelector(`#poke`)
@@ -10,16 +12,22 @@ const pokeSelect3 = document.querySelector(`#poke-select3`)
 const playerNames = document.querySelectorAll('.player-names')
 const playerSelectors = document.querySelectorAll(`.player-selectors`)
 const pName = document.querySelectorAll(`.pName`)
-const startOverBtn = document.querySelector('#start-over')
-const p1Team = document.querySelector('#player-0')
-const p2Team = document.querySelector('#player-1')
+const startOverBtn = document.getElementById('start-over')
+const battleArena = document.getElementById('battle-arena')
+const p1Team = document.getElementById('player-0')
+const p2Team = document.getElementById('player-1')
+const footer = document.querySelector('footer')
 
 let playerOneTeam = []
 let playerTwoTeam = []
 
+startOverBtn.classList.add('purple')
+
 const getStarted = () => {
     startBtn.classList.add('purple')
-    nameForm.classList.remove('purple')
+    main.classList.remove('invisible')
+    playerContainer.classList.remove('purple')
+    startOverBtn.classList.remove('purple')
 }
 
 const getPokeData = data => {
@@ -52,8 +60,22 @@ const getGen = evt => {
             genPick.classList.add('purple')
             pokeForm.classList.remove('purple')
         }
+
+const areYouSure = (evt) => {
+    main.classList.add('donskies')
+    startOverBtn.classList.add('purple')
+    footer.innerHTML = `<p>Are you sure you want to start over?</p>
+    <button onclick="deletePoke()">Yes!</button>
+    <button onclick="normalAgain()">No!</button>`
+
+}
+
+const normalAgain = () => {
+    main.classList.remove('donskies')
+    footer.innerHTML = '<button id="start-over" onclick="areYouSure()">Start over</button>'
+}
     
-const deletePoke = evt => {
+const deletePoke = () => {
     axios.delete(`/api/start-over`)
         .then(res => {
             alert(res.data)
@@ -125,6 +147,13 @@ const putPoke = evt => {
                                 playerTwoTeam.push(res.data[i])
                             }
                         }
+                        pokeForm.classList.add('purple')
+                        battleArena.classList.remove('purple')
+                        p1Team.classList.remove('purple')
+                        p2Team.classList.remove('purple')
+                        battleArena.classList.add('battleArena')
+                        p1Team.classList.add('poke-containers')
+                        p2Team.classList.add('poke-containers')
                         displayPoke();
                     }
                 })
@@ -142,7 +171,7 @@ const playerName = evt => {
     evt.preventDefault()
         playerNames[0].textContent = capitalize(pName[0].value)
         playerNames[1].textContent = capitalize(pName[1].value)
-        nameForm.classList.add('purple')
+        playerContainer.classList.add('purple')
         genPick.classList.remove('purple')
 }
 
@@ -152,7 +181,7 @@ const makePokeCard = (poke) => {
     if (newHp === 0){
         // alert(`${capitalize(poke.playerName)}'s ${capitalize(poke.name)} has fainted!`)
         return `<div class="fainted" class="poke-cards">
-        <p class="poke-name">Fainted ${capitalize(poke.name)}</p>
+        <p class="poke-name">Fainted</p>
         <img alt='who's that pokemon?' src="${poke.front}" class="poke-picture"/>
         <p>HP:${newHp}</p>
         <button class="poke-attack-btns" onclick="damagePoke(${poke.player})" disabled>Attack</button>
@@ -169,9 +198,8 @@ const makePokeCard = (poke) => {
 }
 
 const displayPoke = () => {
-    pokeForm.classList.add('purple')
-    p1Team.innerHTML = `${playerNames[0].textContent}'s Team`
-    p2Team.innerHTML = `${playerNames[1].textContent}'s Team`
+    p1Team.innerHTML = `<h3>${playerNames[0].textContent}'s Team</h3>`
+    p2Team.innerHTML = `<h3>${playerNames[1].textContent}'s Team</h3>`
 
     playerOneTeam.forEach((poke) => {
         let pokeHtml = makePokeCard(poke)
@@ -182,7 +210,19 @@ const displayPoke = () => {
         let pokeHtml = makePokeCard(poke)
         p2Team.innerHTML += pokeHtml
     })
-    
+
+        if(playerOneTeam[0].hp <= 0 && playerOneTeam[1].hp <= 0 && playerOneTeam[2].hp <= 0){
+            displayWinner(playerNames[1].textContent);
+        }else if (playerTwoTeam[0].hp <= 0 && playerTwoTeam[1].hp <= 0 && playerTwoTeam[2].hp){
+            displayWinner(playerNames[0].textContent)
+        }   
+}
+
+const displayWinner = (winner) => {
+    main.classList.add('donskies')
+    footer.innerHTML = ''
+    footer.innerHTML += `<p>Congrats ${winner}! You are the winner of this simulation! Would you like to play again?</p>
+    <button onclick="deletePoke()">Play Again!</button>`
 }
 
 
@@ -193,4 +233,4 @@ for(let i = 0; i < genBtns.length; i++){
     genBtns[i].addEventListener(`click`, getGen)
 }
 
-startOverBtn.addEventListener('click', deletePoke)
+startOverBtn.addEventListener('click', areYouSure)

@@ -7,7 +7,26 @@
   </head>
   <body class="container">
     <header>
-      <h1 id="title">POKEMON BATTLE SIMULATOR</h1>
+      <img src="Images/footer.png" alt="Pokemon">
+      <h1 id="title">BATTLE SIMULATOR</h1>
+    </header>
+    
+    
+    <button id="startBtn" onclick="getStarted()">Get Started!</button>
+    
+    <main class="invisible">
+      <div class="purple" id="player-container">
+        <form id="player-name" >
+          <h6>Please enter 2 player names</h6>
+          <aside>
+            <input required class="pName" type="text" placeholder="Trainer 1">
+            
+            <button id="playerButton">Let's Go!</button>
+            
+            <input required class="pName" type="text" placeholder="Trainer 2">
+          </aside>
+        </div>
+      </form>
       <div class="purple" id="genPick">
         <p>Pick a Generation!</p>
         <section id="genSelect">
@@ -16,45 +35,40 @@
           <button class="genBtn" id="3">Gen 3</button>
         </section>
       </div>
-    </header>
 
-    <form class="purple" id="player-name">
-      <div id="playerNames">
-        <h6>Please enter 2 player names</h6>
-        <input required class="pName" type="text" placeholder="Trainer 1">
-        <input required class="pName" type="text" placeholder="Trainer 2">
+      <form class="purple" id="poke">
+          <section class="poke">
+          <aside class="select-player" id="player-select">
+            <div class="selection">
+              <label for="p1" class="player-names">Trainer 1</label>
+              <input name="p1" class="player-selectors" type="radio" value="0"/>
+            </div>
+            
+            <div class="selection">
+              <label for="p2" class="player-names">Trainer 2</label>
+              <input name="p2" class="player-selectors" type="radio" value="1"/>
+            </div> 
+          </aside>
+          <aside class="select-poke" id="poke-selections">
+            <p>Select the Pokemon for your team</p>
+            <select required class="selectors" name="poke-select" id="poke-select1"></select>
+            
+            <select required class="selectors" name="poke-select2" id="poke-select2"></select>
+            
+            <select required class="selectors" name="poke-select3" id="poke-select3"></select>
+            <button class="selectors">Save Team</button>
+          </aside>
+        </section>
+      </form>
+      <div class="purple" id="battle-arena">
+        <section class="purple" class="poke-containers" id="player-0"></section>
+        <section class="purple" class="poke-containers" id="player-1"></section>
       </div>
-      <button>Submit</button>
-    </form>
-
-    <form class="purple" id="poke">
-      <label for="poke-select">Select your Pokemon</label>
-      <select required class="selectors" name="poke-select" id="poke-select1"></select>
-      <label for="poke-select">Select your Pokemon</label>
-      <select required class="selectors" name="poke-select" id="poke-select2"></select>
-      <label for="poke-select">Select your Pokemon</label>
-      <select required class="selectors" name="poke-select" id="poke-select3"></select>
-      <label for="player-select">Select which player</label>
-      <div name="player-select" id="player-select">
-        <label for="p1" class="player-names">Trainer 1</label>
-        <input name="p1" class="player-selectors" type="radio" value="0"/>
-
-        <label for="p2" class="player-names">Trainer 2</label>
-        <input name="p2" class="player-selectors" type="radio" value="1"/> 
-
-      </div>
-      <button>Submit</button>
-    </form>
-    <main>
-      <button id="startBtn" onclick="getStarted()">Get Started!</button>
-      <section class="poke-containers" id="player-0"></section>
-      <section class="poke-containers" id="player-1"></section>
     </main>
     
     
     <footer>
-      <img src="Images/footer.png" alt="pokeTitle">
-      <button class="purple" id="start-over">Start over</button>
+      <button id="start-over">Start over</button>
     </footer>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>

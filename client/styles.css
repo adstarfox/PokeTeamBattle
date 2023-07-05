@@ -1,13 +1,22 @@
 header{
-    height: 100px;
+    height: 98px;
     text-align: center;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    font-size: xx-large;
+    justify-content: center;
+    font-size: 250%;
     font-weight: 900;
+    font-style: italic;
+    color: white;
+    text-shadow: 2px 2px 10px black;
+    gap: 20px;
     background-color: red;
+    border-bottom: black solid 2px;
+}
+
+header>img{
+    height:80%;
 }
 
 #startBtn{
@@ -25,73 +34,218 @@ header{
 #startBtn:hover{
     cursor:pointer;
     background-image: url(./Images/Open3.png);
+    background-size: 110%;
     font-size: xx-large;
 }
 
-.player-name{
-    width: 100vw;
-    position: fixed;
-    top: 100px;
-    left: 100px;
-    flex-direction: row;
-}
-
-#playerNames{
+#player-name{
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    gap: calc(50% - 150px);
+}
+
+#player-name>aside{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    gap: -50%;
     justify-content: space-evenly;
+    align-items: center;
+}
+
+#playerButton{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    font-size: 150%;
+    text-align: center;
+}
+#playerButton:hover{
+    cursor: pointer;
+    background-color: black;
+    font-size: 150%;
+    color: white;
+}
+
+h6{
+    text-align: center;
+    font-size: 100px;
+}
+
+.pName {
+    height: 50px;
+    width: 200px;
+    font-size: xx-large;
+    text-align: center;
+    border: solid black 3px;
+    color: black;
+}
+aside>input{
+background: rgba(255, 255, 255, .5);    
+font-weight: 100;
+}
+
+#genPick{
+    font-size: 100px;
 }
 
 #genSelect{
     width: 500px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    position: fixed;
+    top: calc(50% - 75px);
+    left: calc(50% - 250px);
 }
 
 .genBtn{
-    height: 50px;
-    width: 100px;
-    font-size: large;
+    height: 150px;
+    width: 150px;
+    font-size: 50%;
+    border-radius: 100%;
+    background-color: blanchedalmond;
+}
+
+.genBtn:hover{
+    cursor: pointer;
+    background: rgba(10, 10, 10, 0.9);
+    color: white;
 }
 
 main{
     height: calc(100vh - 200px);
     display: flex;
+    text-align: center;
     flex-direction: row;
-    justify-content: space-between;
-}
-img{
-    height:200px;
+    justify-content: center;
+    background-image: url(Images/arena.png);
+    background-size: 100%;
+    background-position: -50%;
+    background-repeat: no-repeat;
 }
 
 footer{
-    height: 100px;
+    height: 98px;
     background-color: yellow;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-top: solid black 2px;
 }
-footer > img{
+
+.poke{
     height: 100%;
-}
-footer>button{
-    height: 50%;
-}
-.poke-containers{
-    width: 700px;
+    width: 100vw;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
+}
+
+.select-player{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 100px;
+    size: 100px;
+}
+input[type='radio']{
+    transform: scale(3);
+}
+
+.selection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select-poke{
+    height: 100%;
+    max-width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     text-align: center;
-    border: solid black 5px;
+}
+
+.select-poke>p{
+    font-size: 50px;
+}
+
+.selectors{
+    text-align: center;
+    height: 50px;
+    max-width: 50%;
+    font-size: 120%;
+}
+.selectors:hover{
+    cursor: pointer;
+}
+
+.battleArena{
+    height: 100%;
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+.poke-containers{
+    height: 80%;
+    display:flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: space-between;
+    text-align: center;
+    gap: 10px;
+}
+
+#player-0{
+    position: fixed;
+    left: 300px;
+    top: calc(50% - 400px);
+}
+
+#player-1{
+    position: fixed;
+    top: calc(50% - 397px);
+    right: 300px;
+    flex-flow: column wrap-reverse;
 }
 
 .poke-cards{
-    height: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#player-0 > h3{
+    font-size: 50px;
+    position:relative;
+    top: -30px;
+
+}
+
+#player-0 > div > img{
+  transform: scaleX(-1);
+}
+
+#player-1 > h3{
+    font-size: 50px;
+    position:relative;
+    top: -30px;
 }
 
 .poke-picture{
@@ -109,11 +263,61 @@ footer>button{
     font-weight: 100;
 }
 
+.poke-attack-btns:hover{
+    cursor: pointer;
+    background-color: red;
+    color: black;
+    font-style: italic;
+    font-weight: 100px;
+}
+
 .fainted{
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     -webkit-filter: grayscale(100%); 
     filter: grayscale(100%);
 }
 
+.poke-attack-btns:disabled{
+    cursor: not-allowed;
+}
+
 .purple{
     display: none;
+}
+.invisible{
+    visibility: hidden;
+}
+.donskies{
+    pointer-events: none;
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: xx-large;
+}
+
+footer > button{
+    height: 90px;
+    width: 90px;
+    color: transparent;
+    background-image: url(./Images/Start.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 100%;
+}
+footer > button:hover{
+    cursor:pointer;
+    color: white;
+    background-image: url(./Images/Open3.png);
+    background-size: 110%;
+    font-size: large;
 }
